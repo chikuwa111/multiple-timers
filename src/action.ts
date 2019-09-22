@@ -1,4 +1,9 @@
-import { Timer } from './type';
+import { Timer, State } from './type';
+
+export const load = (state: State) => ({
+  type: 'LOAD' as const,
+  payload: { state },
+});
 
 export const add = () => ({
   type: 'ADD' as const,
@@ -30,6 +35,7 @@ export const reset = (id: string) => ({
 });
 
 export type Action =
+  | ReturnType<typeof load>
   | ReturnType<typeof add>
   | ReturnType<typeof remove>
   | ReturnType<typeof update>

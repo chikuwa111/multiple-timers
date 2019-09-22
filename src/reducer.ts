@@ -2,8 +2,14 @@ import nanoid from 'nanoid';
 import { State } from './type';
 import { Action } from './action';
 
+export const initialState: State = {
+  timers: [],
+};
+
 export default function reducer(state: State, action: Action): State {
   switch (action.type) {
+    case 'LOAD':
+      return action.payload.state;
     case 'ADD':
       return {
         timers: [
