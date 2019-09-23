@@ -24,19 +24,24 @@ export default function TimerHistory({ initialMilliseconds, actions }: Props) {
 
   return (
     <div onClick={() => setIsOpen(!isOpen)}>
-      <label>
+      <CustomLabel>
         {isOpen ? <ArrowDropdownIcon /> : <ArrowDroprightIcon />}history
-      </label>
+      </CustomLabel>
       {isOpen && (
         <CustomUl>
-          <li>
-            <CheckmarkIcon /> {hoursString}:{minutesString}:{secondsString}
-          </li>
+          <CustomLi>
+            <CheckmarkIcon />
+            <CustomSpan>
+              {hoursString}:{minutesString}:{secondsString}
+            </CustomSpan>
+          </CustomLi>
           {actions.map(action => (
-            <li key={action.unixMilliseconds}>
-              {action.type === 'START' ? <PlayIcon /> : <PauseIcon />}{' '}
-              {new Date(action.unixMilliseconds).toLocaleString()}
-            </li>
+            <CustomLi key={action.unixMilliseconds}>
+              {action.type === 'START' ? <PlayIcon /> : <PauseIcon />}
+              <CustomSpan>
+                {new Date(action.unixMilliseconds).toLocaleString()}
+              </CustomSpan>
+            </CustomLi>
           ))}
         </CustomUl>
       )}
@@ -44,7 +49,19 @@ export default function TimerHistory({ initialMilliseconds, actions }: Props) {
   );
 }
 
+const CustomLabel = styled.label`
+  display: flex;
+`;
+
 const CustomUl = styled.ul`
   list-style: none;
   margin: 0;
+`;
+
+const CustomLi = styled.li`
+  display: flex;
+`;
+
+const CustomSpan = styled.span`
+  margin-left: 0.25rem;
 `;

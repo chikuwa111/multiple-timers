@@ -6,6 +6,9 @@ type Props = {
 };
 
 const Button = styled.button<Props>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 3px;
   border: 2px solid;
   padding: 0.25rem 0.5rem;
@@ -16,6 +19,5 @@ const Button = styled.button<Props>`
 export default Button;
 
 export const FullWidthButton = styled(Button)`
-  display: inline-block;
   width: 100%;
 `;

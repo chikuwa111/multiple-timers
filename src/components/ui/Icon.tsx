@@ -11,36 +11,36 @@ import {
 } from 'react-icons/io';
 
 export const PlayIcon = styled(IoMdPlay)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const PauseIcon = styled(IoMdPause)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const AddIcon = styled(IoMdAdd)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const CloseIcon = styled(IoMdClose)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const CheckmarkIcon = styled(IoMdCheckmark)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const ArrowDroprightIcon = styled(IoMdArrowDropright)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;
 
 export const ArrowDropdownIcon = styled(IoMdArrowDropdown)`
+  display: flex;
   font-size: 1rem;
-  vertical-align: top;
 `;

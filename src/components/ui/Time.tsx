@@ -16,6 +16,8 @@ export const TimeText = styled.span<TimeTextProps>`
 
 export const TimeInput = styled(Input)`
   display: inline-block;
+  flex-grow: 1;
+  text-align: center;
   -moz-appearance: textfield;
 
   &::-webkit-outer-spin-button,
