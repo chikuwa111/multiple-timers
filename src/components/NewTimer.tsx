@@ -2,6 +2,11 @@ import React, { Dispatch, useCallback, ChangeEvent, useMemo } from 'react';
 import { Timer as TimerType } from '../type';
 import { Action } from '../action';
 import { convertMillisecondsToTime, bindTimerAction } from '../timer';
+import TextField from './ui/TextField';
+import { TimeWrapper, TimeInput } from './ui/Time';
+import Button, { FullWidthButton } from './ui/Button';
+import { Margin1Rem } from './ui/Margin';
+import { FlexContainer } from './ui/Flex';
 
 type Props = {
   timer: TimerType;
@@ -9,7 +14,7 @@ type Props = {
 };
 
 export default function NewTimer({ timer, dispatch }: Props) {
-  const { id, label, note, milliseconds } = timer;
+  const { id, label, milliseconds } = timer;
 
   const {
     hours,
@@ -19,13 +24,10 @@ export default function NewTimer({ timer, dispatch }: Props) {
     minutesString,
     secondsString,
   } = useMemo(() => convertMillisecondsToTime(milliseconds), [milliseconds]);
-  const {
-    updateLabel,
-    updateNote,
-    updateMilliseconds,
-    startTimer,
-    removeTimer,
-  } = useMemo(() => bindTimerAction(id, dispatch), [id, dispatch]);
+  const { updateLabel, updateMilliseconds, startTimer, removeTimer } = useMemo(
+    () => bindTimerAction(id, dispatch),
+    [id, dispatch]
+  );
 
   const updateHours = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,48 +59,52 @@ export default function NewTimer({ timer, dispatch }: Props) {
 
   return (
     <div>
-      <div>
-        <input
+      <FlexContainer>
+        <Button color="lightcoral" onClick={removeTimer}>
+          ✖︎
+        </Button>
+        <TextField
           type="text"
           value={label}
           onChange={updateLabel}
           placeholder="label"
         />
-      </div>
-      <div>
-        <input
+      </FlexContainer>
+      <Margin1Rem />
+      <TimeWrapper>
+        <TimeInput
           type="number"
           min="0"
           max="99"
           value={hoursString}
           onChange={updateHours}
         />
-        <span> : </span>
-        <input
+        <div>：</div>
+        <TimeInput
           type="number"
           min="0"
           max="59"
           value={minutesString}
           onChange={updateMinutes}
         />
-        <span> : </span>
-        <input
+        <div>：</div>
+        <TimeInput
           type="number"
           min="0"
           max="59"
           value={secondsString}
           onChange={updateSeconds}
         />
-      </div>
-      <div>
-        <button onClick={startTimer}>START</button>
-      </div>
-      <div>
-        <textarea value={note} onChange={updateNote} placeholder="note" />
-      </div>
-      <div>
-        <button onClick={removeTimer}>X</button>
-      </div>
+      </TimeWrapper>
+      <Margin1Rem />
+      <FullWidthButton
+        primary={true}
+        color="mediumseagreen"
+        onClick={startTimer}
+      >
+        ▶︎
+      </FullWidthButton>
+      <Margin1Rem />
     </div>
   );
 }

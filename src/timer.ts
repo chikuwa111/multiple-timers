@@ -20,7 +20,7 @@ export function convertMillisecondsToTime(milliseconds: number) {
   };
 }
 
-export function calcRemainingMilliseconds(
+export function calcCurrentMilliseconds(
   milliseconds: number,
   actions: TimerAction[]
 ): number {

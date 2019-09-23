@@ -3,9 +3,14 @@ import { Timer } from '../type';
 import { Action } from '../action';
 import {
   convertMillisecondsToTime,
-  calcRemainingMilliseconds,
+  calcCurrentMilliseconds,
   bindTimerAction,
 } from '../timer';
+import { FlexContainer } from './ui/Flex';
+import Button, { FullWidthButton } from './ui/Button';
+import { TimeWrapper } from './ui/Time';
+import { Margin1Rem } from './ui/Margin';
+import Label from './ui/Label';
 
 type Props = {
   timer: Timer;
@@ -13,10 +18,10 @@ type Props = {
 };
 
 export default function FixedTimer({ timer, dispatch }: Props) {
-  const { id, label, note, milliseconds, actions } = timer;
+  const { id, label, milliseconds, actions } = timer;
 
-  const [remainingMilliseconds, setRemainingMilliseconds] = useState(
-    calcRemainingMilliseconds(milliseconds, actions)
+  const [currentMilliseconds, setCurrentMilliseconds] = useState(
+    calcCurrentMilliseconds(milliseconds, actions)
   );
 
   const isMoving = useMemo(() => actions[actions.length - 1].type === 'START', [
@@ -25,19 +30,17 @@ export default function FixedTimer({ timer, dispatch }: Props) {
   useEffect(() => {
     if (isMoving) {
       const id = setInterval(() => {
-        setRemainingMilliseconds(
-          calcRemainingMilliseconds(milliseconds, actions)
-        );
+        setCurrentMilliseconds(calcCurrentMilliseconds(milliseconds, actions));
       }, 1000);
       return () => {
         clearInterval(id);
       };
     }
-  }, [milliseconds, actions, isMoving, setRemainingMilliseconds]);
+  }, [milliseconds, actions, isMoving, setCurrentMilliseconds]);
 
   const { hoursString, minutesString, secondsString } = useMemo(
-    () => convertMillisecondsToTime(remainingMilliseconds),
-    [remainingMilliseconds]
+    () => convertMillisecondsToTime(currentMilliseconds),
+    [currentMilliseconds]
   );
   const { startTimer, stopTimer, removeTimer } = useMemo(
     () => bindTimerAction(id, dispatch),
@@ -46,29 +49,31 @@ export default function FixedTimer({ timer, dispatch }: Props) {
 
   return (
     <div>
-      <div>
-        <span>{label}</span>
-      </div>
-      <div>
-        <span>{hoursString}</span>
-        <span> : </span>
-        <span>{minutesString}</span>
-        <span> : </span>
-        <span>{secondsString}</span>
-      </div>
-      <div>
-        {isMoving ? (
-          <button onClick={stopTimer}>STOP</button>
-        ) : (
-          <button onClick={startTimer}>START</button>
-        )}
-      </div>
-      <div>
-        <div style={{ whiteSpace: 'pre' }}>{note}</div>
-      </div>
-      <div>
-        <button onClick={removeTimer}>X</button>
-      </div>
+      <FlexContainer>
+        <Button color="lightcoral" onClick={removeTimer}>
+          ✖︎
+        </Button>
+        <Label>{label}</Label>
+      </FlexContainer>
+      <Margin1Rem />
+      <TimeWrapper>
+        {`${hoursString}：${minutesString}：${secondsString}`}
+      </TimeWrapper>
+      <Margin1Rem />
+      {isMoving ? (
+        <FullWidthButton primary={true} color="lightcoral" onClick={stopTimer}>
+          ■
+        </FullWidthButton>
+      ) : (
+        <FullWidthButton
+          primary={true}
+          color="mediumseagreen"
+          onClick={startTimer}
+        >
+          ▶︎
+        </FullWidthButton>
+      )}
+      <Margin1Rem />
     </div>
   );
 }

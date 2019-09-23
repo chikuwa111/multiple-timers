@@ -2,6 +2,9 @@ import React, { useCallback } from 'react';
 import usePersistedReducer from '../persistedReducer';
 import { add } from '../action';
 import Timer from './Timer';
+import Container from './ui/Container';
+import { FlexStartContainer, FlexComponent } from './ui/Flex';
+import { FullWidthButton } from './ui/Button';
 
 export default function App() {
   const [state, dispatch] = usePersistedReducer();
@@ -11,13 +14,17 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <div>
-      <div>
+    <Container>
+      <FlexStartContainer>
         {state.timers.map(timer => (
-          <Timer key={timer.id} timer={timer} dispatch={dispatch} />
+          <FlexComponent key={timer.id}>
+            <Timer timer={timer} dispatch={dispatch} />
+          </FlexComponent>
         ))}
-      </div>
-      <button onClick={addTimer}>ADD</button>
-    </div>
+      </FlexStartContainer>
+      <FullWidthButton color="lightcoral" onClick={addTimer}>
+        ＋
+      </FullWidthButton>
+    </Container>
   );
 }
