@@ -11,6 +11,7 @@ import Button, { FullWidthButton } from './ui/Button';
 import { TimeWrapper, TimeText } from './ui/Time';
 import { Margin1Rem } from './ui/Margin';
 import Label from './ui/Label';
+import TimerHistory from './TimerHistory';
 
 type Props = {
   timer: Timer;
@@ -77,6 +78,8 @@ export default function FixedTimer({ timer, dispatch }: Props) {
           ▶︎
         </FullWidthButton>
       )}
+      <Margin1Rem />
+      <TimerHistory initialMilliseconds={milliseconds} actions={actions} />
     </div>
   );
 }
