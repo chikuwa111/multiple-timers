@@ -2,6 +2,13 @@ import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { TimerAction } from '../type';
 import { convertMillisecondsToTime } from '../timer';
+import {
+  ArrowDropdownIcon,
+  ArrowDroprightIcon,
+  CheckmarkIcon,
+  PlayIcon,
+  PauseIcon,
+} from './ui/Icon';
 
 type Props = {
   initialMilliseconds: number;
@@ -17,15 +24,17 @@ export default function TimerHistory({ initialMilliseconds, actions }: Props) {
 
   return (
     <div onClick={() => setIsOpen(!isOpen)}>
-      <label>{isOpen ? '▽' : '▷'} history</label>
+      <label>
+        {isOpen ? <ArrowDropdownIcon /> : <ArrowDroprightIcon />}history
+      </label>
       {isOpen && (
         <CustomUl>
           <li>
-            ● {hoursString}:{minutesString}:{secondsString}
+            <CheckmarkIcon /> {hoursString}:{minutesString}:{secondsString}
           </li>
           {actions.map(action => (
             <li key={action.unixMilliseconds}>
-              {action.type === 'START' ? '▶︎' : '■'}{' '}
+              {action.type === 'START' ? <PlayIcon /> : <PauseIcon />}{' '}
               {new Date(action.unixMilliseconds).toLocaleString()}
             </li>
           ))}

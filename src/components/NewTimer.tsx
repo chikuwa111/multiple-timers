@@ -7,6 +7,7 @@ import { TimeWrapper, TimeInput } from './ui/Time';
 import Button, { FullWidthButton } from './ui/Button';
 import { Margin1Rem } from './ui/Margin';
 import { FlexContainer } from './ui/Flex';
+import { CloseIcon, PlayIcon } from './ui/Icon';
 
 type Props = {
   timer: TimerType;
@@ -61,7 +62,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
     <div>
       <FlexContainer>
         <Button color="lightcoral" onClick={removeTimer}>
-          ✖︎
+          <CloseIcon />
         </Button>
         <TextField
           type="text"
@@ -105,7 +106,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
         color="mediumseagreen"
         onClick={startTimer}
       >
-        ▶︎
+        <PlayIcon />
       </FullWidthButton>
       <Margin1Rem />
     </div>

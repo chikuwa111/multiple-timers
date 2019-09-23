@@ -6,12 +6,13 @@ import {
   calcCurrentMilliseconds,
   bindTimerAction,
 } from '../timer';
+import TimerHistory from './TimerHistory';
 import { FlexContainer } from './ui/Flex';
 import Button, { FullWidthButton } from './ui/Button';
 import { TimeWrapper, TimeText } from './ui/Time';
 import { Margin1Rem } from './ui/Margin';
 import Label from './ui/Label';
-import TimerHistory from './TimerHistory';
+import { PlayIcon, PauseIcon, CloseIcon } from './ui/Icon';
 
 type Props = {
   timer: Timer;
@@ -54,7 +55,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
     <div>
       <FlexContainer>
         <Button color="lightcoral" onClick={removeTimer}>
-          ✖︎
+          <CloseIcon />
         </Button>
         <Label>{label}</Label>
       </FlexContainer>
@@ -67,7 +68,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
       <Margin1Rem />
       {isMoving ? (
         <FullWidthButton primary={true} color="lightcoral" onClick={stopTimer}>
-          ■
+          <PauseIcon />
         </FullWidthButton>
       ) : (
         <FullWidthButton
@@ -75,7 +76,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
           color="mediumseagreen"
           onClick={startTimer}
         >
-          ▶︎
+          <PlayIcon />
         </FullWidthButton>
       )}
       <Margin1Rem />

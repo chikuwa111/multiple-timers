@@ -37,6 +37,7 @@
     "nanoid": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-icons": "^3.7.0",
     "styled-components": "^4.3.2"
   }
 }

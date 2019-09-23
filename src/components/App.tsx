@@ -5,6 +5,7 @@ import Timer from './Timer';
 import Container from './ui/Container';
 import { FlexStartContainer, FlexComponent } from './ui/Flex';
 import { FullWidthButton } from './ui/Button';
+import { AddIcon } from './ui/Icon';
 
 export default function App() {
   const [state, dispatch] = usePersistedReducer();
@@ -23,7 +24,7 @@ export default function App() {
         ))}
       </FlexStartContainer>
       <FullWidthButton color="lightcoral" onClick={addTimer}>
-        ＋
+        <AddIcon />
       </FullWidthButton>
     </Container>
   );
