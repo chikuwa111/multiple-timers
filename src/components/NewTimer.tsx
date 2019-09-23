@@ -74,6 +74,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
       <TimeWrapper>
         <TimeInput
           type="number"
+          pattern="\d*"
           min="0"
           max="99"
           value={hoursString}
@@ -82,6 +83,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
         <div>：</div>
         <TimeInput
           type="number"
+          pattern="\d*"
           min="0"
           max="59"
           value={minutesString}
@@ -90,6 +92,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
         <div>：</div>
         <TimeInput
           type="number"
+          pattern="\d*"
           min="0"
           max="59"
           value={secondsString}
