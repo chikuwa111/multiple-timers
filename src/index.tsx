@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App';
 
 const root = document.querySelector('#root');
-render(<h1>test</h1>, root);
+render(<App />, root);

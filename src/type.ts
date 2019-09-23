@@ -1,12 +1,13 @@
-type TimerAction = {
+export type TimerAction = {
   type: 'START' | 'STOP';
-  datetime: Date;
+  unixMilliseconds: number;
 };
 
 export type Timer = {
   id: string;
   label: string;
-  millseconds: number;
+  note: string;
+  milliseconds: number;
   actions: TimerAction[];
 };
 

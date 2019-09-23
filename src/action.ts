@@ -14,9 +14,9 @@ export const remove = (id: string) => ({
   payload: { id },
 });
 
-export const update = (timer: Timer) => ({
+export const update = (id: string, timer: Partial<Timer>) => ({
   type: 'UPDATE' as const,
-  payload: { timer },
+  payload: { id, timer },
 });
 
 export const start = (id: string) => ({

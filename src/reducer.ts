@@ -16,8 +16,9 @@ export default function reducer(state: State, action: Action): State {
           ...state.timers,
           {
             id: nanoid(),
-            label: 'timer',
-            millseconds: 30 * 60 * 1000,
+            label: '',
+            note: '',
+            milliseconds: 30 * 60 * 1000,
             actions: [],
           },
         ],
@@ -27,9 +28,9 @@ export default function reducer(state: State, action: Action): State {
         timers: state.timers.filter(timer => timer.id !== action.payload.id),
       };
     case 'UPDATE': {
-      const { timer } = action.payload;
+      const { id, timer } = action.payload;
       return {
-        timers: state.timers.map(t => (t.id !== timer.id ? t : timer)),
+        timers: state.timers.map(t => (t.id !== id ? t : { ...t, ...timer })),
       };
     }
     case 'START':
@@ -41,7 +42,7 @@ export default function reducer(state: State, action: Action): State {
                 ...timer,
                 actions: [
                   ...timer.actions,
-                  { type: 'START', datetime: new Date() },
+                  { type: 'START', unixMilliseconds: Number(new Date()) },
                 ],
               }
         ),
@@ -55,7 +56,7 @@ export default function reducer(state: State, action: Action): State {
                 ...timer,
                 actions: [
                   ...timer.actions,
-                  { type: 'STOP', datetime: new Date() },
+                  { type: 'STOP', unixMilliseconds: Number(new Date()) },
                 ],
               }
         ),
