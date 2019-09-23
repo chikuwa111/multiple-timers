@@ -1,5 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const dist = `${__dirname}/dist`;
 const src = `${__dirname}/src`;
@@ -29,6 +30,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${src}/static/index.html`,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: `${src}/static/assets`,
+        to: `${dist}/assets`,
+      },
+    ]),
     new WorkboxWebpackPlugin.GenerateSW({
       swDest: 'sw.js',
       clientsClaim: true,
