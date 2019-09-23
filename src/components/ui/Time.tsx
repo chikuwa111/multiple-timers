@@ -7,6 +7,13 @@ export const TimeWrapper = styled.div`
   justify-content: center;
 `;
 
+type TimeTextProps = {
+  isOver: boolean;
+};
+export const TimeText = styled.span<TimeTextProps>`
+  color: ${props => (props.isOver ? 'firebrick' : 'inherit')};
+`;
+
 export const TimeInput = styled(Input)`
   display: inline-block;
   -moz-appearance: textfield;

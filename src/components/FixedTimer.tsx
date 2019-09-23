@@ -8,7 +8,7 @@ import {
 } from '../timer';
 import { FlexContainer } from './ui/Flex';
 import Button, { FullWidthButton } from './ui/Button';
-import { TimeWrapper } from './ui/Time';
+import { TimeWrapper, TimeText } from './ui/Time';
 import { Margin1Rem } from './ui/Margin';
 import Label from './ui/Label';
 
@@ -27,6 +27,8 @@ export default function FixedTimer({ timer, dispatch }: Props) {
   const isMoving = useMemo(() => actions[actions.length - 1].type === 'START', [
     actions,
   ]);
+  const isOver = useMemo(() => currentMilliseconds < 0, [currentMilliseconds]);
+
   useEffect(() => {
     if (isMoving) {
       const id = setInterval(() => {
@@ -39,7 +41,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
   }, [milliseconds, actions, isMoving, setCurrentMilliseconds]);
 
   const { hoursString, minutesString, secondsString } = useMemo(
-    () => convertMillisecondsToTime(currentMilliseconds),
+    () => convertMillisecondsToTime(Math.abs(currentMilliseconds)),
     [currentMilliseconds]
   );
   const { startTimer, stopTimer, removeTimer } = useMemo(
@@ -57,7 +59,9 @@ export default function FixedTimer({ timer, dispatch }: Props) {
       </FlexContainer>
       <Margin1Rem />
       <TimeWrapper>
-        {`${hoursString}：${minutesString}：${secondsString}`}
+        <TimeText isOver={isOver}>
+          {`${hoursString}：${minutesString}：${secondsString}`}
+        </TimeText>
       </TimeWrapper>
       <Margin1Rem />
       {isMoving ? (
@@ -73,7 +77,6 @@ export default function FixedTimer({ timer, dispatch }: Props) {
           ▶︎
         </FullWidthButton>
       )}
-      <Margin1Rem />
     </div>
   );
 }
