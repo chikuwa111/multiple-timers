@@ -7,11 +7,11 @@ import {
   bindTimerAction,
 } from '../timer';
 import TimerHistory from './TimerHistory';
+import EditableLabel from './EditableLabel';
 import { FlexContainer } from './ui/Flex';
 import Button, { FullWidthButton } from './ui/Button';
 import { TimeWrapper, TimeText } from './ui/Time';
 import { Margin1Rem } from './ui/Margin';
-import Label from './ui/Label';
 import { PlayIcon, PauseIcon, CloseIcon } from './ui/Icon';
 
 type Props = {
@@ -46,7 +46,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
     () => convertMillisecondsToTime(Math.abs(currentMilliseconds)),
     [currentMilliseconds]
   );
-  const { startTimer, stopTimer, removeTimer } = useMemo(
+  const { updateLabel, startTimer, stopTimer, removeTimer } = useMemo(
     () => bindTimerAction(id, dispatch),
     [id, dispatch]
   );
@@ -57,7 +57,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
         <Button color="lightcoral" onClick={removeTimer}>
           <CloseIcon />
         </Button>
-        <Label>{label}</Label>
+        <EditableLabel body={label} onChange={updateLabel} />
       </FlexContainer>
       <Margin1Rem />
       <TimeWrapper>
