@@ -9,6 +9,31 @@ const src = `${__dirname}/src`;
  * @type import('webpack').Configuration
  */
 
+const plugins =
+  process.env.NODE_ENV === 'production'
+    ? [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+          template: `${src}/static/index.html`,
+        }),
+        new CopyWebpackPlugin([
+          {
+            from: `${src}/static/assets`,
+            to: `${dist}/assets`,
+          },
+        ]),
+        new WorkboxWebpackPlugin.GenerateSW({
+          swDest: 'sw.js',
+          clientsClaim: true,
+          skipWaiting: true,
+        }),
+      ]
+    : [
+        new HtmlWebpackPlugin({
+          template: `${src}/static/index.html`,
+        }),
+      ];
+
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: `${src}/index.tsx`,
@@ -25,23 +50,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: `${src}/static/index.html`,
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: `${src}/static/assets`,
-        to: `${dist}/assets`,
-      },
-    ]),
-    new WorkboxWebpackPlugin.GenerateSW({
-      swDest: 'sw.js',
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
-  ],
+  plugins,
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
