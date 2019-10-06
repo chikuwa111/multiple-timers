@@ -2,6 +2,7 @@ import React, { Dispatch, useCallback, ChangeEvent, useMemo } from 'react';
 import { Timer as TimerType } from '../type';
 import { Action } from '../action';
 import { convertMillisecondsToTime, bindTimerAction } from '../timer';
+import DragIcon from './DragIcon';
 import TextField from './ui/TextField';
 import { TimeWrapper, TimeInput } from './ui/Time';
 import Button, { FullWidthButton } from './ui/Button';
@@ -70,6 +71,7 @@ export default function NewTimer({ timer, dispatch }: Props) {
           onChange={updateLabel}
           placeholder="label"
         />
+        <DragIcon />
       </FlexContainer>
       <Margin1Rem />
       <TimeWrapper>

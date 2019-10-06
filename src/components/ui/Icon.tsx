@@ -7,6 +7,7 @@ import {
   IoMdCheckmark,
   IoMdArrowDropright,
   IoMdArrowDropdown,
+  IoMdMove,
   // @ts-ignore
 } from 'react-icons/io';
 
@@ -41,6 +42,11 @@ export const ArrowDroprightIcon = styled(IoMdArrowDropright)`
 `;
 
 export const ArrowDropdownIcon = styled(IoMdArrowDropdown)`
+  display: flex;
+  font-size: 1rem;
+`;
+
+export const MoveIcon = styled(IoMdMove)`
   display: flex;
   font-size: 1rem;
 `;

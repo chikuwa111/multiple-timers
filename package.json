@@ -19,6 +19,7 @@
     "@types/nanoid": "^2.0.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-sortable-hoc": "^0.6.5",
     "@types/styled-components": "^4.1.19",
     "@types/webpack": "^4.39.1",
     "@types/workbox-webpack-plugin": "^4.1.0",
@@ -40,12 +41,14 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "dependencies": {
+    "array-move": "^2.1.0",
     "localforage": "^1.7.3",
     "lodash": "^4.17.15",
     "nanoid": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-icons": "^3.7.0",
+    "react-sortable-hoc": "^1.10.1",
     "styled-components": "^4.3.2"
   }
 }

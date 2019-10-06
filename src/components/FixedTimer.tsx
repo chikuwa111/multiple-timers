@@ -9,6 +9,7 @@ import {
 } from '../timer';
 import TimerHistory from './TimerHistory';
 import EditableLabel from './EditableLabel';
+import DragIcon from './DragIcon';
 import { FlexContainer } from './ui/Flex';
 import Button, { FullWidthButton } from './ui/Button';
 import { TimeWrapper, TimeText } from './ui/Time';
@@ -62,6 +63,7 @@ export default function FixedTimer({ timer, dispatch }: Props) {
           <CloseIcon />
         </Button>
         <EditableLabel body={label} onChange={updateLabel} />
+        <DragIcon />
       </FlexContainer>
       <Margin1Rem />
       <TimeWrapper>
