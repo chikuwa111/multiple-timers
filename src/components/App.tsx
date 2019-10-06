@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-// @ts-ignore
 import arrayMove from 'array-move';
 import usePersistedReducer from '../persistedReducer';
 import { updateTimers, add } from '../action';

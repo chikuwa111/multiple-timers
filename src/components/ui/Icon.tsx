@@ -8,7 +8,6 @@ import {
   IoMdArrowDropright,
   IoMdArrowDropdown,
   IoMdMove,
-  // @ts-ignore
 } from 'react-icons/io';
 
 export const PlayIcon = styled(IoMdPlay)`

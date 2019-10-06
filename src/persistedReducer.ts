@@ -1,5 +1,4 @@
 import { useReducer, useEffect } from 'react';
-// @ts-ignore
 import localforage from 'localforage';
 import throttle from 'lodash/throttle';
 import reducer, { initialState } from './reducer';
