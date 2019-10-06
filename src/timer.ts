@@ -20,25 +20,33 @@ export function convertMillisecondsToTime(milliseconds: number) {
   };
 }
 
-export function calcCurrentMilliseconds(
-  milliseconds: number,
-  actions: TimerAction[]
-): number {
-  let remainingTime = actions.reduce((time, action) => {
+// NOTE: STARTが最後のアクション、すなわち稼働中のタイマーの場合は、求まる値がマイナスになる。
+//       これはキャッシュ用の関数なので、以下の`calcCurrentMilliseconds`と合わせて使うこと。
+export function calcElapsedMilliseconds(actions: TimerAction[]): number {
+  return actions.reduce((time, action) => {
     switch (action.type) {
       case 'START':
-        return time + action.unixMilliseconds;
-      case 'STOP':
         return time - action.unixMilliseconds;
+      case 'STOP':
+        return time + action.unixMilliseconds;
       default: {
         const _: never = action.type; // eslint-disable-line @typescript-eslint/no-unused-vars
         return time;
       }
     }
-  }, milliseconds);
-  const isMoving = actions[actions.length - 1].type === 'START';
-  if (isMoving) remainingTime -= Number(new Date());
-  return remainingTime;
+  }, 0);
+}
+
+export function calcCurrentMilliseconds(
+  milliseconds: number,
+  elapsedMilliseconds: number,
+  isMoving: boolean
+): number {
+  if (isMoving) {
+    return milliseconds - elapsedMilliseconds - Number(new Date());
+  } else {
+    return milliseconds - elapsedMilliseconds;
+  }
 }
 
 export function bindTimerAction(id: string, dispatch: Dispatch<Action>) {

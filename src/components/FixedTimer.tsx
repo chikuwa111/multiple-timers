@@ -3,6 +3,7 @@ import { Timer } from '../type';
 import { Action } from '../action';
 import {
   convertMillisecondsToTime,
+  calcElapsedMilliseconds,
   calcCurrentMilliseconds,
   bindTimerAction,
 } from '../timer';
@@ -21,26 +22,29 @@ type Props = {
 
 export default function FixedTimer({ timer, dispatch }: Props) {
   const { id, label, milliseconds, actions } = timer;
-
-  const [currentMilliseconds, setCurrentMilliseconds] = useState(
-    calcCurrentMilliseconds(milliseconds, actions)
-  );
-
+  const elapsedMilliseconds = useMemo(() => calcElapsedMilliseconds(actions), [
+    actions,
+  ]);
   const isMoving = useMemo(() => actions[actions.length - 1].type === 'START', [
     actions,
   ]);
+  const [currentMilliseconds, setCurrentMilliseconds] = useState(
+    calcCurrentMilliseconds(milliseconds, elapsedMilliseconds, isMoving)
+  );
   const isOver = useMemo(() => currentMilliseconds < 0, [currentMilliseconds]);
 
   useEffect(() => {
     if (isMoving) {
       const id = setInterval(() => {
-        setCurrentMilliseconds(calcCurrentMilliseconds(milliseconds, actions));
+        setCurrentMilliseconds(
+          calcCurrentMilliseconds(milliseconds, elapsedMilliseconds, isMoving)
+        );
       }, 1000);
       return () => {
         clearInterval(id);
       };
     }
-  }, [milliseconds, actions, isMoving, setCurrentMilliseconds]);
+  }, [milliseconds, elapsedMilliseconds, isMoving, setCurrentMilliseconds]);
 
   const { hoursString, minutesString, secondsString } = useMemo(
     () => convertMillisecondsToTime(Math.abs(currentMilliseconds)),
