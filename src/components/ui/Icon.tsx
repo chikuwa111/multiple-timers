@@ -7,7 +7,7 @@ import {
   IoMdCheckmark,
   IoMdArrowDropright,
   IoMdArrowDropdown,
-  // @ts-ignore
+  IoMdMove,
 } from 'react-icons/io';
 
 export const PlayIcon = styled(IoMdPlay)`
@@ -41,6 +41,11 @@ export const ArrowDroprightIcon = styled(IoMdArrowDropright)`
 `;
 
 export const ArrowDropdownIcon = styled(IoMdArrowDropdown)`
+  display: flex;
+  font-size: 1rem;
+`;
+
+export const MoveIcon = styled(IoMdMove)`
   display: flex;
   font-size: 1rem;
 `;

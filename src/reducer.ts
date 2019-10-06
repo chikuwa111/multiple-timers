@@ -10,6 +10,11 @@ export default function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'LOAD':
       return action.payload.state;
+    case 'UPDATE_TIMERS':
+      return {
+        ...state,
+        timers: action.payload.timers,
+      };
     case 'ADD':
       return {
         timers: [

@@ -5,6 +5,11 @@ export const load = (state: State) => ({
   payload: { state },
 });
 
+export const updateTimers = (timers: Timer[]) => ({
+  type: 'UPDATE_TIMERS' as const,
+  payload: { timers },
+});
+
 export const add = () => ({
   type: 'ADD' as const,
 });
@@ -36,6 +41,7 @@ export const reset = (id: string) => ({
 
 export type Action =
   | ReturnType<typeof load>
+  | ReturnType<typeof updateTimers>
   | ReturnType<typeof add>
   | ReturnType<typeof remove>
   | ReturnType<typeof update>
