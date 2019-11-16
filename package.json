@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --content-base dist/ --inline",
     "build": "NODE_ENV=production webpack",
-    "deploy": "npm run build && rm -rf docs/ && cp -r dist/ docs/",
+    "deploy": "npm run build && rm -rf docs/ && cp -r dist/ docs/ && printf \"timer.chikuwa111.com\" > docs/CNAME",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
