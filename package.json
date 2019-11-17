@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "array-move": "^2.1.0",
+    "dayjs": "^1.8.17",
     "localforage": "^1.7.3",
     "lodash": "^4.17.15",
     "nanoid": "^2.1.1",

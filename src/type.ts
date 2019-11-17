@@ -14,3 +14,10 @@ export type Timer = {
 export type State = {
   timers: Timer[];
 };
+
+export type TimerActivity = {
+  timerId: string;
+  timerLabel: string;
+  startUnixMilliseconds: number;
+  stopUnixMilliseconds: number;
+};
