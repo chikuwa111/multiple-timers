@@ -56,6 +56,7 @@ export default function reducer(state: State, action: Action): State {
     case 'REMOVE':
       return {
         ...state,
+        timers: state.timers.filter(timer => timer.id !== action.payload.id),
         archivedTimers: state.archivedTimers.filter(
           timer => timer.id !== action.payload.id
         ),
