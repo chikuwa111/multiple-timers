@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import usePersistedReducer from '../persistedReducer';
 import TimerApp from './TimerApp';
 import ActivityTimeline from './ActivityTimeline';
@@ -16,6 +16,10 @@ enum APP {
 export default function App() {
   const [state, dispatch] = usePersistedReducer();
   const [app, setApp] = useState<APP>(APP.TIMER);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [app]);
 
   return (
     <>
