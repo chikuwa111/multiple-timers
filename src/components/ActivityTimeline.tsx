@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { TimerActivity, State } from '../type';
 import Activity from './Activity';
+import { TextBox, Text } from './ui/TextBox';
 
 type Props = {
   state: State;
@@ -32,6 +33,14 @@ export default function ActivityTimeline({ state }: Props) {
         .sort((a, b) => b.stopUnixMilliseconds - a.stopUnixMilliseconds),
     [timers, archivedTimers]
   );
+
+  if (activities.length === 0) {
+    return (
+      <TextBox>
+        <Text>No activities</Text>
+      </TextBox>
+    );
+  }
 
   return (
     <>
