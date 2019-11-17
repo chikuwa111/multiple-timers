@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
-import usePersistedReducer from '../persistedReducer';
-import { TimerActivity } from '../type';
+import { TimerActivity, State } from '../type';
 import Activity from './Activity';
-import Container from './ui/Container';
 
-export default function ActivityTimeline() {
-  const [state] = usePersistedReducer();
+type Props = {
+  state: State;
+};
+
+export default function ActivityTimeline({ state }: Props) {
   const { timers } = state;
 
   const activities = useMemo(
@@ -33,13 +34,13 @@ export default function ActivityTimeline() {
   );
 
   return (
-    <Container>
+    <>
       {activities.map(activity => (
         <Activity
           key={`${activity.timerId}-${activity.startUnixMilliseconds}`}
           {...activity}
         />
       ))}
-    </Container>
+    </>
   );
 }

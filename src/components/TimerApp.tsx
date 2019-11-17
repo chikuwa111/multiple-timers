@@ -1,14 +1,17 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, Dispatch } from 'react';
 import arrayMove from 'array-move';
-import usePersistedReducer from '../persistedReducer';
-import { updateTimers, add } from '../action';
+import { State } from '../type';
+import { updateTimers, add, Action } from '../action';
 import SortableTimerList from './SortableTimerList';
-import Container from './ui/Container';
 import { FullWidthButton } from './ui/Button';
 import { AddIcon } from './ui/Icon';
 
-export default function TimerApp() {
-  const [state, dispatch] = usePersistedReducer();
+type Props = {
+  state: State;
+  dispatch: Dispatch<Action>;
+};
+
+export default function TimerApp({ state, dispatch }: Props) {
   const { timers } = state;
 
   const addTimer = useCallback(() => {
@@ -23,7 +26,7 @@ export default function TimerApp() {
   );
 
   return (
-    <Container>
+    <>
       <SortableTimerList
         axis="xy"
         useDragHandle={true}
@@ -35,6 +38,6 @@ export default function TimerApp() {
       <FullWidthButton color="lightcoral" onClick={addTimer}>
         <AddIcon />
       </FullWidthButton>
-    </Container>
+    </>
   );
 }
