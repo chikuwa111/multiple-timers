@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
+  disabled?: boolean;
   primary?: boolean;
   color?: string;
 };
@@ -9,7 +10,7 @@ const Button = styled.button<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   border-radius: 3px;
   border: 2px solid;
   border-color: ${props => props.color || 'inherit'};

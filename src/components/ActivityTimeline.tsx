@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
 import { TimerActivity, State } from '../type';
 import Activity from './Activity';
+import { TextBox, Text } from './ui/TextBox';
 
 type Props = {
   state: State;
 };
 
 export default function ActivityTimeline({ state }: Props) {
-  const { timers } = state;
+  const { timers, archivedTimers } = state;
 
   const activities = useMemo(
     () =>
-      timers
+      [...timers, ...archivedTimers]
         .flatMap(timer => {
           const timerActivities: TimerActivity[] = [];
           const { id, label, actions } = timer;
@@ -30,8 +31,16 @@ export default function ActivityTimeline({ state }: Props) {
           return timerActivities;
         })
         .sort((a, b) => b.stopUnixMilliseconds - a.stopUnixMilliseconds),
-    [timers]
+    [timers, archivedTimers]
   );
+
+  if (activities.length === 0) {
+    return (
+      <TextBox>
+        <Text>No activities</Text>
+      </TextBox>
+    );
+  }
 
   return (
     <>
