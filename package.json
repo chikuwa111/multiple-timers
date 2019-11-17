@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --content-base dist/ --inline",
     "build": "NODE_ENV=production webpack",
-    "deploy": "npm run build && rm -rf docs/ && cp -r dist/ docs/",
+    "deploy": "npm run build && rm -rf docs/ && cp -r dist/ docs/ && printf \"timer.chikuwa111.com\" > docs/CNAME",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "array-move": "^2.1.0",
+    "dayjs": "^1.8.17",
     "localforage": "^1.7.3",
     "lodash": "^4.17.15",
     "nanoid": "^2.1.1",
