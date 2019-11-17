@@ -6,28 +6,31 @@ import Container from './ui/Container';
 import { PlayIcon, ListBoxIcon } from './ui/Icon';
 import { BottomNavigation, BottomNavItem } from './ui/BottomNavigation';
 
-type App = 'TimerApp' | 'ActivityTimeline';
+enum APP {
+  TIMER,
+  TIMELINE,
+}
 
 export default function App() {
   const [state, dispatch] = usePersistedReducer();
-  const [app, setApp] = useState<App>('TimerApp');
+  const [app, setApp] = useState<APP>(APP.TIMER);
 
   return (
     <>
       <Container>
-        {app === 'TimerApp' && <TimerApp state={state} dispatch={dispatch} />}
-        {app === 'ActivityTimeline' && <ActivityTimeline state={state} />}
+        {app === APP.TIMER && <TimerApp state={state} dispatch={dispatch} />}
+        {app === APP.TIMELINE && <ActivityTimeline state={state} />}
       </Container>
       <BottomNavigation>
         <BottomNavItem
-          active={app === 'TimerApp'}
-          onClick={() => setApp('TimerApp')}
+          active={app === APP.TIMER}
+          onClick={() => setApp(APP.TIMER)}
         >
           <PlayIcon />
         </BottomNavItem>
         <BottomNavItem
-          active={app === 'ActivityTimeline'}
-          onClick={() => setApp('ActivityTimeline')}
+          active={app === APP.TIMELINE}
+          onClick={() => setApp(APP.TIMELINE)}
         >
           <ListBoxIcon />
         </BottomNavItem>
