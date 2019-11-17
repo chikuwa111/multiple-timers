@@ -13,6 +13,7 @@ export type Timer = {
 
 export type State = {
   timers: Timer[];
+  archivedTimers: Timer[];
 };
 
 export type TimerActivity = {

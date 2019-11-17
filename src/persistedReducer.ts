@@ -17,7 +17,7 @@ export default function usePersistedReducer() {
 
   useEffect(() => {
     loadState().then(state => {
-      if (state != null) dispatch(load(state));
+      if (state != null) dispatch(load({ ...initialState, ...state }));
     });
   }, [dispatch]);
 

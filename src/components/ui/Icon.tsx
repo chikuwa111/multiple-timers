@@ -9,6 +9,8 @@ import {
   IoMdArrowDropdown,
   IoMdMove,
   IoMdListBox,
+  IoMdArchive,
+  IoMdReturnLeft,
 } from 'react-icons/io';
 
 export const PlayIcon = styled(IoMdPlay)`
@@ -52,6 +54,16 @@ export const MoveIcon = styled(IoMdMove)`
 `;
 
 export const ListBoxIcon = styled(IoMdListBox)`
+  display: flex;
+  font-size: 1rem;
+`;
+
+export const ArchiveIcon = styled(IoMdArchive)`
+  display: flex;
+  font-size: 1rem;
+`;
+
+export const ReturnLeftIcon = styled(IoMdReturnLeft)`
   display: flex;
   font-size: 1rem;
 `;

@@ -1,6 +1,14 @@
 import { TimerAction } from './type';
 import { Dispatch, ChangeEvent } from 'react';
-import { Action, update, start, stop, remove } from './action';
+import {
+  Action,
+  update,
+  start,
+  stop,
+  remove,
+  archive,
+  unarchive,
+} from './action';
 
 export function convertMillisecondsToTime(milliseconds: number) {
   const millsecondsToSeconds = Math.floor(milliseconds / 1000);
@@ -60,6 +68,8 @@ export function bindTimerAction(id: string, dispatch: Dispatch<Action>) {
   const startTimer = () => dispatch(start(id));
   const stopTimer = () => dispatch(stop(id));
   const removeTimer = () => dispatch(remove(id));
+  const archiveTimer = () => dispatch(archive(id));
+  const unarchiveTimer = () => dispatch(unarchive(id));
 
   return {
     updateLabel,
@@ -68,5 +78,7 @@ export function bindTimerAction(id: string, dispatch: Dispatch<Action>) {
     startTimer,
     stopTimer,
     removeTimer,
+    archiveTimer,
+    unarchiveTimer,
   };
 }
