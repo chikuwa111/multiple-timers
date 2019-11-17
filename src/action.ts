@@ -14,6 +14,16 @@ export const add = () => ({
   type: 'ADD' as const,
 });
 
+export const archive = (id: string) => ({
+  type: 'ARCHIVE' as const,
+  payload: { id },
+});
+
+export const unarchive = (id: string) => ({
+  type: 'UNARCHIVE' as const,
+  payload: { id },
+});
+
 export const remove = (id: string) => ({
   type: 'REMOVE' as const,
   payload: { id },
@@ -43,6 +53,8 @@ export type Action =
   | ReturnType<typeof load>
   | ReturnType<typeof updateTimers>
   | ReturnType<typeof add>
+  | ReturnType<typeof archive>
+  | ReturnType<typeof unarchive>
   | ReturnType<typeof remove>
   | ReturnType<typeof update>
   | ReturnType<typeof start>
