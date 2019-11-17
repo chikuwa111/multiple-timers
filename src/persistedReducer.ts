@@ -19,10 +19,10 @@ export default function usePersistedReducer() {
     loadState().then(state => {
       if (state != null) dispatch(load(state));
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    saveState(state);
+    if (state !== initialState) saveState(state);
   }, [state]);
 
   return [state, dispatch] as const;
